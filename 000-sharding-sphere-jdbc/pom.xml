@@ -12,43 +12,76 @@
     <artifactId>sharding-sphere-jdbc</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <mysql-connector-java.version>8.0.11</mysql-connector-java.version>
+        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+<!--        <sharding-sphere.version>3.1.0</sharding-sphere.version>-->
+        <sharding-sphere.version>4.0.0-RC2</sharding-sphere.version>
+    </properties>
+
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
             <scope>runtime</scope>
         </dependency>
+
         <!--Mybatis-Plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.1</version>
+            <version>${mybatis-plus.version}</version>
         </dependency>
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.baomidou/dynamic-datasource-spring-boot-starter &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
+<!--            <version>3.1.1</version>-->
+<!--        </dependency>-->
+
         <!--shardingsphere start-->
         <!-- for spring boot -->
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>3.1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
+<!--            <version>${sharding-sphere.version}</version>-->
+<!--        </dependency>-->
+
         <!-- for spring namespace -->
+<!--        <dependency>-->
+<!--            <groupId>io.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-jdbc-spring-namespace</artifactId>-->
+<!--            <version>${sharding-sphere.version}</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>io.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-transaction-2pc-xa</artifactId>-->
+<!--            <version>${sharding-sphere.version}</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>io.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-transaction-spring-boot-starter</artifactId>-->
+<!--            <version>${sharding-sphere.version}</version>-->
+<!--        </dependency>-->
+        <!-- shardingSphere 依赖 -->
         <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-namespace</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-transaction-2pc-xa</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-transaction-spring-boot-starter</artifactId>
-            <version>3.1.0</version>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+            <version>${sharding-sphere.version}</version>
         </dependency>
         <!--shardingsphere end-->
+
     </dependencies>
 
 </project>

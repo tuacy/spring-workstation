@@ -1,0 +1,48 @@
+# web port
+server:
+  port: 9016
+
+## DataSource Config
+#spring:
+#  datasource:
+#    # 指定驱动类
+#    driver-class-name: com.mysql.jdbc.Driver
+#    # 数据库地址
+#    url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
+#    # 数据库用户名
+#    username: root
+#    # 数据库用户密码
+#    password: 123456
+
+spring:
+  shardingsphere:
+    props:
+      sql:
+        show:  # 是否开启SQL显示，默认是false，开发过程我们把它设成true以方便查看SQL执行过程
+          true
+    datasource:
+      names: history,stat  # 指定数据源名字，多个数据源之间以逗号分隔
+      history:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
+        username: root
+        password: root
+      stat:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/stat?serverTimezone=Asia/Shanghai&useSSL=false
+        username: root
+        password: root
+    sharding:
+      defaultDatabaseStrategy:
+        hint:
+          algorithmClassName: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.MyDatasourceRoutingAlgorithm # 声明默认数据库分片策略使用Hint策略，指定Hint分片算法类名称，该类需实现HintShardingAlgorithm接口并提供无参数的构造器
+      tables: # 数据分片规则配置，user，order是我们声明的逻辑表名称
+        history-acc:
+          actualDataNodes: history.history-acc # 指定实际的数据节点，由数据源名 + 逻辑表名组成，以小数点分隔
+        stat-acc:
+          actualDataNodes: stat.stat-acc
+      defaultTableStrategy:
+        none:
+          any: ""
