@@ -4,7 +4,8 @@
 
     <!-- 插入数据 -->
     <insert id="insertItem">
-        INSERT INTO `base_history_acc_org` (`pointPkId`, `recTime`, `value`) VALUES (#{item.pointPkId}, #{item.recTime}, #{item.value});
+--         INSERT INTO `history_acc` (`pointPkId`, `recTime`, `value`) VALUES (#{item.pointPkId}, #{item.recTime}, #{item.value});
+insert into t_order(price,user_id,status)values(1,1,1)
     </insert>
 
 </mapper>
