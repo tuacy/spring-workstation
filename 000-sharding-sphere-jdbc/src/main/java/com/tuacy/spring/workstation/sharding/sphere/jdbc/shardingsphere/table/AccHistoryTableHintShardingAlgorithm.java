@@ -11,12 +11,12 @@ import java.util.HashSet;
  * @author: tuacy.
  * @date: 2021/5/7 15:58.
  */
-public class AccHistroyTableHintShardingAlgorithm implements HintShardingAlgorithm<String> {
+public class AccHistoryTableHintShardingAlgorithm implements HintShardingAlgorithm<String> {
 
     @Override
     public Collection<String> doSharding(Collection<String> collection, HintShardingValue<String> hintShardingValue) {
         Collection<String> result = new HashSet<>();
-        result.add("t_order_2");
+        result.add("history_acc_000");
         return result;
     }
 }

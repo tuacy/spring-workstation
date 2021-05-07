@@ -21,37 +21,28 @@ spring:
         show:  # 是否开启SQL显示，默认是false，开发过程我们把它设成true以方便查看SQL执行过程
           true
     datasource:
-      names: m0,m1,m2  # 指定数据源名字，多个数据源之间以逗号分隔
-      m0:
+      names: history,stat  # 指定数据源名字，多个数据源之间以逗号分隔
+      history:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/m0?serverTimezone=Asia/Shanghai&useSSL=false
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
         username: root
         password: root
-      m1:
+      stat:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/m1?serverTimezone=Asia/Shanghai&useSSL=false
-        username: root
-        password: root
-      m2:
-        type: com.zaxxer.hikari.HikariDataSource
-        driverClassName: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/m2?serverTimezone=Asia/Shanghai&useSSL=false
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/stat?serverTimezone=Asia/Shanghai&useSSL=false
         username: root
         password: root
     sharding:
       tables:
-        t_order:
+        history_acc:
           database-strategy:
             standard:
-              sharding-column: order_id
+              sharding-column: recTime
               precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
-          key-generator:
-            column: order_id
-            type: SNOWFLAKE
           table-strategy:
-            inline:
-              sharding-column: order_id
-              algorithm-expression: t_order_2
+            standard:
+              sharding-column: recTime
+              precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccHistoryTablePreciseShardingAlgorithm
 

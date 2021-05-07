@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @version 1.0
@@ -21,6 +22,7 @@ import java.util.UUID;
 @Slf4j
 public class MockController {
 
+    private static final AtomicInteger counter = new AtomicInteger();
     private IHistoryService historyService;
     private IStatService statService;
 
@@ -42,7 +44,7 @@ public class MockController {
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String test() {
         HistoryDO item = new HistoryDO();
-        item.setPointPkId(UUID.randomUUID().variant());
+        item.setPointPkId(counter.getAndIncrement());
         item.setRecTime("2021-05-07 11:50:00");
         item.setValue(10d);
         historyService.insertHistory(item);

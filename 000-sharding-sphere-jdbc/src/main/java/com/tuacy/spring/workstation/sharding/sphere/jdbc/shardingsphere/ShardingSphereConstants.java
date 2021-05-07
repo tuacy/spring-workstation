@@ -8,5 +8,10 @@ package com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere;
 public interface ShardingSphereConstants {
 
 
+    interface DataSource {
+        String DATA_SOURCE_HISTORY = "history";
+        String DATA_SOURCE_STAT = "stat";
+    }
+
 
 }
