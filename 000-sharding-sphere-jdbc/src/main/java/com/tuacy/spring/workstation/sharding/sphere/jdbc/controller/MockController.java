@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class MockController {
 
-    private static final AtomicInteger counter = new AtomicInteger();
     private IHistoryService historyService;
     private IStatService statService;
 
@@ -44,7 +43,7 @@ public class MockController {
     @RequestMapping(value = "/test", method = RequestMethod.POST)
     public String test() {
         HistoryDO item = new HistoryDO();
-        item.setPointPkId(counter.getAndIncrement());
+        item.setPointPkId((int) UUID.randomUUID().getLeastSignificantBits());
         item.setRecTime("2021-05-07 11:50:00");
         item.setValue(10d);
         historyService.insertHistory(item);

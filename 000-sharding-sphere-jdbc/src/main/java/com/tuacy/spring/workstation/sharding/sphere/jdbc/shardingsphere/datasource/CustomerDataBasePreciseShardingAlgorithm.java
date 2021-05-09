@@ -12,6 +12,7 @@ import java.util.Collection;
  * @date: 2021/5/7 16:27.
  */
 public class CustomerDataBasePreciseShardingAlgorithm implements PreciseShardingAlgorithm<Integer> {
+
     @Override
     public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<Integer> shardingValue) {
         return ShardingSphereConstants.DataSource.DATA_SOURCE_HISTORY;

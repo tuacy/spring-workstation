@@ -16,7 +16,7 @@ public class AccHistoryTableHintShardingAlgorithm implements HintShardingAlgorit
     @Override
     public Collection<String> doSharding(Collection<String> collection, HintShardingValue<String> hintShardingValue) {
         Collection<String> result = new HashSet<>();
-        result.add("history_acc_000");
+        result.add("history_acc");
         return result;
     }
 }

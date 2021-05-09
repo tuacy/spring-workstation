@@ -15,22 +15,20 @@ spring:
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
         username: root
-        password: root
+        password: 123456
       stat:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/stat?serverTimezone=Asia/Shanghai&useSSL=false
         username: root
-        password: root
+        password: 123456
     sharding:
       tables:
         history_acc:
           database-strategy:
-            standard:
-              sharding-column: recTime
-              precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
+            hint:
+              algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDatasourceHintShardingAlgorithm
           table-strategy:
-            standard:
-              sharding-column: recTime
-              precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccHistoryTablePreciseShardingAlgorithm
+            hint:
+              algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccHistoryTableHintShardingAlgorithm
 

@@ -11,8 +11,9 @@ import java.util.Collection;
  * @date: 2021/5/7 16:27.
  */
 public class AccHistoryTablePreciseShardingAlgorithm implements PreciseShardingAlgorithm<Integer> {
+
     @Override
     public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<Integer> shardingValue) {
-        return "history_acc_000";
+        return "history_acc";
     }
 }
