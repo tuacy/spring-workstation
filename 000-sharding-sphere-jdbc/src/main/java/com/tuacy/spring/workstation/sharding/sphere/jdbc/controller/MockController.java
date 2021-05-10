@@ -1,6 +1,7 @@
 package com.tuacy.spring.workstation.sharding.sphere.jdbc.controller;
 
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.history.HistoryDO;
+import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.stat.StatDO;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.service.IHistoryService;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.service.IStatService;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +43,7 @@ public class MockController {
     @RequestMapping(value = "/historyInsert", method = RequestMethod.POST)
     public String historyInsert() {
         HistoryDO item = new HistoryDO();
-        item.setPointPkId((int) UUID.randomUUID().getLeastSignificantBits());
+        item.setPointPkId(Math.abs((int) UUID.randomUUID().getLeastSignificantBits()));
         item.setRecTime("2021-05-07 11:50:00");
         item.setValue(10d);
         historyService.insertHistory(item);
@@ -56,11 +57,12 @@ public class MockController {
      */
     @RequestMapping(value = "/statInsert", method = RequestMethod.POST)
     public String statInsert() {
-        HistoryDO item = new HistoryDO();
-        item.setPointPkId((int) UUID.randomUUID().getLeastSignificantBits());
+        StatDO item = new StatDO();
+        item.setPointPkId(Math.abs((int) UUID.randomUUID().getLeastSignificantBits()));
         item.setRecTime("2021-05-07 11:50:00");
         item.setValue(10d);
-        historyService.insertHistory(item);
+        item.setIncrValue(10d);
+        statService.insertStat(item);
         return "ok";
     }
 }

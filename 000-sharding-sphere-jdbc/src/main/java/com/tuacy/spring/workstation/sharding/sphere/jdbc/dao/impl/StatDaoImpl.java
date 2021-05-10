@@ -29,6 +29,6 @@ public class StatDaoImpl implements IStatDao {
      */
     @Override
     public void insertStat(StatDO item) {
-
+        statMapper.insertItem(item);
     }
 }

@@ -27,6 +27,6 @@ public class StatServiceImpl implements IStatService {
      */
     @Override
     public void insertStat(StatDO item) {
-        statDao
+        statDao.insertStat(item);
     }
 }

@@ -20,8 +20,8 @@ public interface ShardingSphereConstants {
     }
 
     interface LogicTable {
-        String HISTORY = "history";
-        String STAT = "stat";
+        String HISTORY = "history_acc";
+        String STAT = "stat_acc";
     }
 
     Map<String, List<String>> dataSourceTable = new HashMap<String, List<String>>() {{
