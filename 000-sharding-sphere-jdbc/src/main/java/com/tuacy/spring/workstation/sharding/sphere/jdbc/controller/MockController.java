@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @version 1.0
@@ -40,8 +39,23 @@ public class MockController {
      *
      * @return 是否成功
      */
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
-    public String test() {
+    @RequestMapping(value = "/historyInsert", method = RequestMethod.POST)
+    public String historyInsert() {
+        HistoryDO item = new HistoryDO();
+        item.setPointPkId((int) UUID.randomUUID().getLeastSignificantBits());
+        item.setRecTime("2021-05-07 11:50:00");
+        item.setValue(10d);
+        historyService.insertHistory(item);
+        return "ok";
+    }
+
+    /**
+     * 测试函数
+     *
+     * @return 是否成功
+     */
+    @RequestMapping(value = "/statInsert", method = RequestMethod.POST)
+    public String statInsert() {
         HistoryDO item = new HistoryDO();
         item.setPointPkId((int) UUID.randomUUID().getLeastSignificantBits());
         item.setRecTime("2021-05-07 11:50:00");

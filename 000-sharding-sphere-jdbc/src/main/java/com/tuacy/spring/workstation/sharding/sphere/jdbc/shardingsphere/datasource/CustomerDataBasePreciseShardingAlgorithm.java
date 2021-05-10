@@ -5,6 +5,8 @@ import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @version 1.0
@@ -15,6 +17,11 @@ public class CustomerDataBasePreciseShardingAlgorithm implements PreciseSharding
 
     @Override
     public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<Integer> shardingValue) {
-        return ShardingSphereConstants.DataSource.DATA_SOURCE_HISTORY;
+        for (Map.Entry<String, List<String>> entryItem : ShardingSphereConstants.dataSourceTable.entrySet()) {
+            if (entryItem.getValue().contains(shardingValue.getLogicTableName())) {
+                return entryItem.getKey();
+            }
+        }
+        throw new IllegalArgumentException("分库异常");
     }
 }

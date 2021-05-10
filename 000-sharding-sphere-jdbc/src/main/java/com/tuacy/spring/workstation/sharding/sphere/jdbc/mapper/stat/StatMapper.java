@@ -1,6 +1,8 @@
 package com.tuacy.spring.workstation.sharding.sphere.jdbc.mapper.stat;
 
+import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.stat.StatDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 统计数据
@@ -11,4 +13,13 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface StatMapper {
+
+    /**
+     * 插入数据
+     *
+     * @param item 需要插入的item
+     * @return 插入条数
+     */
+    int insertItem(@Param("item") StatDO item);
+
 }
