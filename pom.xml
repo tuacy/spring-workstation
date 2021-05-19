@@ -7,6 +7,7 @@
     <modules>
         <module>000-sharding-sphere-jdbc</module>
         <module>001-fastdfs</module>
+        <module>002-swagger2</module>
     </modules>
 
     <parent>
