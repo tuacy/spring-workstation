@@ -2,3 +2,22 @@
 server:
   port: 9017
 
+spring:
+  http:
+    multipart:
+      maxFileSize: 10Mb # 是单个文件大小
+      maxRequestSize: 10Mb # 总上传的数据大小
+
+# FastDFS
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  so-timeout: 3000
+  connect-timeout: 1000
+  thumb-image: # 缩略图生成参数
+    width: 60
+    height: 60
+  web-server-url: 192.168.0.137/
+  tracker-list: # TrackerList参数,支持多个
+    - 121.199.58.42:22122
