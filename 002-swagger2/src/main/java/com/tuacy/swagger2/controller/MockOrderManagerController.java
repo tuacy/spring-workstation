@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/mock")
 @Slf4j
-@Api(value = "测试接口", tags = "用户测试使用")
-public class MockController {
+@Api(tags = "订单管理")
+public class MockOrderManagerController {
 
     /**
      * 保存数据
@@ -34,8 +34,12 @@ public class MockController {
     @ApiImplicitParam(name = "user", value = "新增用户数据")
     // 说明是什么方法(可以理解为方法注释)
     @ApiOperation(value = "添加用户", notes = "添加用户")
-    public String saveUser(@RequestBody UserInfoParam user) {
+    public String addUser(@RequestBody UserInfoParam user) {
         return "添加用户成功";
+    }
+
+    public String deleteUser() {
+
     }
 
 }

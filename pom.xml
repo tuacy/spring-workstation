@@ -9,6 +9,7 @@
         <module>001-fastdfs</module>
         <module>002-swagger2</module>
         <module>003-easypoi</module>
+        <module>common</module>
     </modules>
 
     <parent>
