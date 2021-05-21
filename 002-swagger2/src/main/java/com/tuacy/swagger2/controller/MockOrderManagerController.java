@@ -38,8 +38,4 @@ public class MockOrderManagerController {
         return "添加用户成功";
     }
 
-    public String deleteUser() {
-
-    }
-
 }
