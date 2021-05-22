@@ -4,42 +4,54 @@ server:
 
 spring:
   shardingsphere:
+    # 属性配置
     props:
-      sql:
-        show:  # 是否开启SQL显示，默认是false，开发过程我们把它设成true以方便查看SQL执行过程
-          true
+      # 展示修改以后的sql语句
+      sql-show: true
+    # 数据源配置
     datasource:
       names: history,stat  # 指定数据源名字，多个数据源之间以逗号分隔
+      # 注意这里的数据源配置用的是 druid
+      common:
+        # 数据库驱动类名
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        # 数据库连接池类名称
+        type: com.alibaba.druid.pool.DruidDataSource
       history:
-        type: com.zaxxer.hikari.HikariDataSource
-        driverClassName: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
         username: root
         password: root
       stat:
-        type: com.zaxxer.hikari.HikariDataSource
-        driverClassName: com.mysql.cj.jdbc.Driver
         jdbc-url: jdbc:mysql://127.0.0.1:3306/stat?serverTimezone=Asia/Shanghai&useSSL=false
         username: root
         password: root
-    sharding:
-      default-data-source-name: history
-      tables:
-        history_acc:
-          database-strategy:
-            standard:
-              sharding-column: pointPkId
-              precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
-          table-strategy:
-            standard:
-              sharding-column: pointPkId
-              precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccHistoryTablePreciseShardingAlgorithm
-        stat_acc:
-          database-strategy:
-            standard:
-              sharding-column: pointPkId
-              precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
-          table-strategy:
-            standard:
-              sharding-column: pointPkId
-              precise-algorithm-class-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccStatTablePreciseShardingAlgorithm
+    # 规则配置
+    rules:
+      sharding:
+        key-generators:
+          # 此处必须要配置，否则会导致报错，因为shardingsphere-jdbc-core-spring-boot-starter需要加载此项配置，官网的demo例子有错
+          snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 123
+        tables:
+          # 逻辑表名称
+          history_acc:
+            database-strategy:
+              standard:
+                aaa:
+                  sharding-column: pointPkId
+                  sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
+            table-strategy:
+              standard:
+                sharding-column: pointPkId
+                sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccHistoryTablePreciseShardingAlgorithm
+          stat_acc:
+            database-strategy:
+              standard:
+                sharding-column: pointPkId
+                sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
+            table-strategy:
+              standard:
+                sharding-column: pointPkId
+                sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccStatTablePreciseShardingAlgorithm

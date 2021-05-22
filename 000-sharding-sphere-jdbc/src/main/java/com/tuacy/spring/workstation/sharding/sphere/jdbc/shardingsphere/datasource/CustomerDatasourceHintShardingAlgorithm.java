@@ -2,11 +2,12 @@ package com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasou
 
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.ShardingSphereConstants;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shardingsphere.api.sharding.hint.HintShardingAlgorithm;
-import org.apache.shardingsphere.api.sharding.hint.HintShardingValue;
+import org.apache.shardingsphere.sharding.api.sharding.hint.HintShardingAlgorithm;
+import org.apache.shardingsphere.sharding.api.sharding.hint.HintShardingValue;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Properties;
 
 /**
  * 自定义分库规则
@@ -24,5 +25,25 @@ public class CustomerDatasourceHintShardingAlgorithm implements HintShardingAlgo
         Collection<String> result = new HashSet<>();
         result.add(ShardingSphereConstants.DataSource.DATA_SOURCE_HISTORY);
         return result;
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public String getType() {
+        return null;
+    }
+
+    @Override
+    public Properties getProps() {
+        return null;
+    }
+
+    @Override
+    public void setProps(Properties properties) {
+
     }
 }

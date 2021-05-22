@@ -1,7 +1,7 @@
 package com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table;
 
-import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
-import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
+
+import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
 
 import java.util.Collection;
 
