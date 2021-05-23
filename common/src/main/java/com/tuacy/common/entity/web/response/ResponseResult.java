@@ -20,6 +20,11 @@ public class ResponseResult<T> implements ResponseEntity {
     @ApiModelProperty(value = "返回结果对象", required = true)
     private List<T> data;
 
+    public ResponseResult() {
+        this.status = ResultType.SUCCESS.getValue();
+        this.msg = ResultType.SUCCESS.getDesc();
+    }
+
     public int getStatus() {
         return status;
     }

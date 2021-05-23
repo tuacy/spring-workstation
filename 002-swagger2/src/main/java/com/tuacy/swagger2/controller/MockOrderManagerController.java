@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2021/5/19 8:50.
  */
 @RestController
-@RequestMapping("/v1/mock")
+@RequestMapping("/v1/mock/orderManager")
 @Slf4j
 @Api(tags = "订单管理")
 public class MockOrderManagerController {
@@ -33,7 +33,7 @@ public class MockOrderManagerController {
     // 方法参数说明，name参数名；value参数说明，备注；dataType参数类型；required 是否必传；defaultValue 默认值
     @ApiImplicitParam(name = "user", value = "新增用户数据")
     // 说明是什么方法(可以理解为方法注释)
-    @ApiOperation(value = "添加用户", notes = "添加用户")
+    @ApiOperation(value = "添加订单", notes = "添加订单")
     public String addUser(@RequestBody UserInfoParam user) {
         return "添加用户成功";
     }

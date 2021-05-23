@@ -22,6 +22,14 @@ public class ResponsePageResult<T> extends ResponseResult<T> {
     @ApiModelProperty(value = "总页数", required = true)
     private long totalPage;
 
+    public ResponsePageResult(long pageIndex, long pageSize, long totalCount, long totalPage) {
+        super();
+        this.pageIndex = pageIndex;
+        this.pageSize = pageSize;
+        this.totalCount = totalCount;
+        this.totalPage = totalPage;
+    }
+
     public long getPageIndex() {
         return pageIndex;
     }
