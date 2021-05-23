@@ -10,21 +10,17 @@ spring:
       sql-show: true
     # 数据源配置
     datasource:
-      names: history,stat  # 指定数据源名字，多个数据源之间以逗号分隔
+      names: history  # 指定数据源名字，多个数据源之间以逗号分隔
       # 注意这里的数据源配置用的是 druid
       common:
         # 数据库驱动类名
         driver-class-name: com.mysql.cj.jdbc.Driver
         # 数据库连接池类名称
-        type: com.alibaba.druid.pool.DruidDataSource
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+        password: 123456
       history:
         jdbc-url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
-        username: root
-        password: root
-      stat:
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/stat?serverTimezone=Asia/Shanghai&useSSL=false
-        username: root
-        password: root
     # 规则配置
     rules:
       sharding:
@@ -33,25 +29,30 @@ spring:
           snowflake:
             type: SNOWFLAKE
             props:
-              worker-id: 123
+              worker-id: 24 # 雪花算法的workId  机器为标识 0-1024
         tables:
-          # 逻辑表名称
+          # 逻辑表名称 -- 按年分表 history_acc_2021
           history_acc:
-            database-strategy:
-              standard:
-                aaa:
-                  sharding-column: pointPkId
-                  sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
+            actual-data-nodes: history.history_acc_$->{2021..2031}
             table-strategy:
               standard:
-                sharding-column: pointPkId
-                sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccHistoryTablePreciseShardingAlgorithm
-          stat_acc:
-            database-strategy:
-              standard:
-                sharding-column: pointPkId
-                sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.datasource.CustomerDataBasePreciseShardingAlgorithm
-            table-strategy:
-              standard:
-                sharding-column: pointPkId
-                sharding-algorithm-name: com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.AccStatTablePreciseShardingAlgorithm
+                sharding-column: recTime
+                sharding-algorithm-name: table-year-sharding
+        sharding-algorithms:
+          table-year-sharding: # 自定义分片算法的别名 -- 按年分表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 0 # 0对应按年分表 TableTimeShardingEnum
+          table-month-sharding: # 自定义分片算法的别名 -- 按月分表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 1 # 1对应按月分表 TableTimeShardingEnum
+          table-week-sharding: # 自定义分片算法的别名 -- 按周月表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 2 # 2对应按周分表 TableTimeShardingEnum
+          table-day-sharding: # 自定义分片算法的别名 -- 按天周表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 3 # 3对应按年天表 TableTimeShardingEnum
+

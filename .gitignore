@@ -3,3 +3,4 @@
 spring-workstation.iml
 000-sharding-sphere-jdbc/target
 000-sharding-sphere-jdbc/000-sharding-sphere-jdbc.iml
+common/common.iml
