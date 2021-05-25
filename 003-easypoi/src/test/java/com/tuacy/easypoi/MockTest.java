@@ -5,13 +5,10 @@ import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
-import cn.afterturn.easypoi.exception.excel.ExcelImportException;
-import com.tuacy.easypoi.entity.TemplateCell;
-import com.tuacy.easypoi.utils.PoiUtils;
+import com.tuacy.easypoi.core.TemplateUtils;
+import com.tuacy.easypoi.core.entity.TemplateCell;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.util.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,6 +16,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * @version 1.0
@@ -63,7 +61,12 @@ public class MockTest {
 
     @Test
     public void aaa() {
-        final List<TemplateCell> templateCells = PoiUtils.loadTemplateCell(new File("temp/simplateTemplage.xlsx"), null);
+        final List<TemplateCell> templateCells = TemplateUtils.loadTemplateCell(new File("temp/simplateTemplage.xlsx"), new Predicate<String>() {
+            @Override
+            public boolean test(String s) {
+                return true;
+            }
+        });
 
 //        FileInputStream in = null;
 //        ByteArrayOutputStream baos   = new ByteArrayOutputStream();

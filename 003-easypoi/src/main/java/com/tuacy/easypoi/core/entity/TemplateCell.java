@@ -1,4 +1,6 @@
-package com.tuacy.easypoi.entity;
+package com.tuacy.easypoi.core.entity;
+
+import com.tuacy.easypoi.core.TemplateConstants;
 
 /**
  * 模板对应的单元格实例
@@ -95,6 +97,10 @@ public class TemplateCell {
 
     public void setTemplateValue(String templateValue) {
         this.templateValue = templateValue;
+    }
+
+    public String getEasyPoiTemplateKey () {
+        return templateValue.substring(TemplateConstants.TEMPLATE_START_WITH.length(), templateValue.length() - TemplateConstants.TEMPLATE_END_WITH.length());
     }
 
     @Override
