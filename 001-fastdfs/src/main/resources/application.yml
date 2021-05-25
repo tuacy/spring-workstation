@@ -18,6 +18,6 @@ fdfs:
   thumb-image: # 缩略图生成参数
     width: 60
     height: 60
-  web-server-url: 192.168.0.137/
+  web-server-url: 192.168.101.250/
   tracker-list: # TrackerList参数,支持多个
-    - 121.199.58.42:22122
+    - 192.168.101.250:22122

@@ -1,5 +1,7 @@
 package com.tuacy.swagger2.controller;
 
+import com.tuacy.common.entity.web.controller.BaseController;
+import com.tuacy.common.entity.web.response.ResponseResult;
 import com.tuacy.swagger2.param.UserInfoParam;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -18,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @date: 2021/5/19 8:50.
  */
 @RestController
-@RequestMapping("/v1/mock")
+@RequestMapping("/v1/mock/userManager")
 @Slf4j
-@Api(value = "测试接口", tags = "用户管理")
-public class MockUserManagerController {
+@Api(tags = "用户管理")
+public class MockUserManagerController extends BaseController {
 
     /**
      * 保存数据
@@ -34,8 +36,8 @@ public class MockUserManagerController {
     @ApiImplicitParam(name = "user", value = "新增用户数据")
     // 说明是什么方法(可以理解为方法注释)
     @ApiOperation(value = "添加用户", notes = "添加用户")
-    public String saveUser(@RequestBody UserInfoParam user) {
-        return "添加用户成功";
+    public ResponseResult<Void> saveUser(@RequestBody UserInfoParam user) {
+        return setResponseResult();
     }
 
 }

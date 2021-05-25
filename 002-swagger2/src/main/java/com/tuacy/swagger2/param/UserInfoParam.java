@@ -1,5 +1,6 @@
 package com.tuacy.swagger2.param;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -7,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author: tuacy.
  * @date: 2021/5/19 8:54.
  */
+@ApiModel(value = "用户信息对象")
 public class UserInfoParam {
 
     /**
