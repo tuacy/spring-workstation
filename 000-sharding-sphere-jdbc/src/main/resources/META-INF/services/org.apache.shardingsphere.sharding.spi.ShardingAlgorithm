@@ -1,1 +1,2 @@
 com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.table.TableTimeStandardShardingAlgorithm
+com.tuacy.spring.workstation.sharding.sphere.jdbc.shardingsphere.database.DatabaseHintShardingAlgorithm

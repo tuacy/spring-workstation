@@ -38,6 +38,10 @@ public interface ShardingSphereConstants {
      */
     interface ShardingType {
         /**
+         * 分库标识
+         */
+        String DATABASE_SHARDING_TYPE = "DatabaseHardingType";
+        /**
          * 按时间分表，里面会根据传递的参数，处理按年分表，按月分表，按周分表，按天分表。
          */
         String TABLE_SHARDING_TYPE_TIME = "TableShardingTypeTime";

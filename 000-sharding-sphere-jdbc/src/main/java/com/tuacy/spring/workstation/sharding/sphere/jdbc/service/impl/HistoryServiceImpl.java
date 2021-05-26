@@ -3,6 +3,7 @@ package com.tuacy.spring.workstation.sharding.sphere.jdbc.service.impl;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.dao.IHistoryDao;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.history.HistoryDO;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.service.IHistoryService;
+import org.apache.shardingsphere.infra.hint.HintManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,10 @@ public class HistoryServiceImpl implements IHistoryService {
      */
     @Override
     public void insertHistory(HistoryDO item) {
+        // Hint分片策略必须要使用 HintManager工具类
+        HintManager hintManager = HintManager.getInstance();
+        hintManager.addDatabaseShardingValue("t_order", 0);
+        hintManager.addTableShardingValue("t_order", 1);
         historyDao.insertHistory(item);
     }
 }
