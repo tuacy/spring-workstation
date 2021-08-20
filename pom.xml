@@ -10,6 +10,7 @@
         <module>002-swagger2</module>
         <module>003-easypoi</module>
         <module>common</module>
+        <module>004-redis</module>
     </modules>
 
     <parent>

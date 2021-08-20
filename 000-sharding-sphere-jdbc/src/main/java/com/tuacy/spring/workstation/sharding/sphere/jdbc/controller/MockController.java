@@ -1,5 +1,6 @@
 package com.tuacy.spring.workstation.sharding.sphere.jdbc.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.history.HistoryDO;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.stat.StatDO;
 import com.tuacy.spring.workstation.sharding.sphere.jdbc.service.IHistoryService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -44,7 +46,7 @@ public class MockController {
     public String historyInsert() {
         HistoryDO item = new HistoryDO();
         item.setPointPkId(Math.abs((int) UUID.randomUUID().getLeastSignificantBits()));
-        item.setRecTime("2021-05-07 11:50:00");
+        item.setRecTime(DateUtil.formatLocalDateTime(LocalDateTime.now()));
         item.setValue(10d);
         historyService.insertHistory(item);
         return "ok";

@@ -11,18 +11,22 @@ spring:
     # 数据源配置
     datasource:
       names: history, stat  # 指定数据源名字，多个数据源之间以逗号分隔
-      # 注意这里的数据源配置用的是 druid
-      common:
+      history:
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
         # 数据库驱动类名
         driver-class-name: com.mysql.cj.jdbc.Driver
         # 数据库连接池类名称
         type: com.zaxxer.hikari.HikariDataSource
         username: root
-        password: root
-      history:
-        jdbc-url: jdbc:mysql://127.0.0.1:3306/history?serverTimezone=Asia/Shanghai&useSSL=false
+        password: 123456
       stat:
         jdbc-url: jdbc:mysql://127.0.0.1:3306/stat?serverTimezone=Asia/Shanghai&useSSL=false
+        # 数据库驱动类名
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        # 数据库连接池类名称
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+        password: 123456
     # 规则配置
     rules:
       sharding:
@@ -35,7 +39,7 @@ spring:
         tables:
           # 逻辑表名称 -- 按年分表 history_acc_2021
           history_acc:
-            actual-data-nodes: history.history_acc_$->{2021..2031}
+            actual-data-nodes: history.history_acc_$->{2020..2031},stat.history_acc_$->{2020..2031}
             database-strategy:
               hint:
                 sharding-algorithm-name: database-hin-sharding
@@ -43,6 +47,7 @@ spring:
               standard:
                 sharding-column: recTime
                 sharding-algorithm-name: table-year-sharding
+        # 分片算法配置
         sharding-algorithms:
           database-hin-sharding:
             type: DatabaseHardingType

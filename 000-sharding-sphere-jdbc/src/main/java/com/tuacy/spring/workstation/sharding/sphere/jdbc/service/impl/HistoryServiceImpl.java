@@ -30,9 +30,14 @@ public class HistoryServiceImpl implements IHistoryService {
     @Override
     public void insertHistory(HistoryDO item) {
         // Hint分片策略必须要使用 HintManager工具类
+        // 清除掉上一次的规则，否则会报错
+        HintManager.clear();
+        // HintManager API 工具类实例
         HintManager hintManager = HintManager.getInstance();
-        hintManager.addDatabaseShardingValue("t_order", 0);
-        hintManager.addTableShardingValue("t_order", 1);
+        // 直接指定对应具体的数据库
+        hintManager.addDatabaseShardingValue("history_acc","stat");
+        // 设置表的分片健
+//        hintManager.addTableShardingValue("recTime" , "2021");
         historyDao.insertHistory(item);
     }
 }

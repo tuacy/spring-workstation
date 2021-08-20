@@ -16,7 +16,7 @@ import java.util.Properties;
  * @date: 2021/5/25 20:12.
  */
 @Slf4j
-public class DatabaseHintShardingAlgorithm implements HintShardingAlgorithm<Integer> {
+public class DatabaseHintShardingAlgorithm implements HintShardingAlgorithm<String> {
 
     /**
      * 配置文件里面配置的自定义参数
@@ -31,10 +31,10 @@ public class DatabaseHintShardingAlgorithm implements HintShardingAlgorithm<Inte
      * @return 分库后指向的数据源名称集合
      */
     @Override
-    public Collection<String> doSharding(Collection<String> availableTargetNames, HintShardingValue<Integer> shardingValue) {
+    public Collection<String> doSharding(Collection<String> availableTargetNames, HintShardingValue<String> shardingValue) {
         List<String> shardingResult = new ArrayList<>();
 
-        shardingResult.add("history");
+        shardingResult.add("stat");
 
         return shardingResult;
     }

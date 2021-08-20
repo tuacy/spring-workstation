@@ -15,7 +15,7 @@
     <properties>
         <mysql-connector-java.version>8.0.11</mysql-connector-java.version>
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
-        <sharding-sphere.version>5.0.0-alpha</sharding-sphere.version>
+        <sharding-sphere.version>5.0.0-beta</sharding-sphere.version>
     </properties>
 
     <dependencies>
