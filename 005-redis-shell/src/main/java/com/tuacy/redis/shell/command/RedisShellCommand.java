@@ -127,7 +127,7 @@ public class RedisShellCommand {
                     System.out.println(String.format("%s %s 读取第(%d)次读写入的是失败", DateUtil.formatLocalDateTime(LocalDateTime.now()), ip1ConnectFactory.getHostName(), loopTemp));
                     return;
                 }
-                System.out.println(String.format("%s %s 第(%d)次读(写入值：读取值) - (%d, %s)", DateUtil.formatLocalDateTime(LocalDateTime.now()), ip1ConnectFactory.getHostName(), loopTemp, baseValue, ObjectUtils.isEmpty(ip1Value) ? "" : ip1Value));
+                System.out.println(String.format("%s %s 第(%d)次读(目标值：实际值) - (%d, %s)", DateUtil.formatLocalDateTime(LocalDateTime.now()), ip1ConnectFactory.getHostName(), loopTemp, baseValue, ObjectUtils.isEmpty(ip1Value) ? "" : ip1Value));
             });
             // ip2
             EXECUTOR.submit(() -> {
@@ -138,7 +138,7 @@ public class RedisShellCommand {
                     System.out.println(String.format("%s %s 第(%d)次读写入的是失败", DateUtil.formatLocalDateTime(LocalDateTime.now()), ip2ConnectFactory.getHostName(), loopTemp));
                     return;
                 }
-                System.out.println(String.format("%s %s 第(%d)次读(写入值：读取值) - (%d, %s)", DateUtil.formatLocalDateTime(LocalDateTime.now()), ip2ConnectFactory.getHostName(), loopTemp, baseValue, ObjectUtils.isEmpty(ip1Value) ? "" : ip1Value));
+                System.out.println(String.format("%s %s 第(%d)次读(目标值：实际值) - (%d, %s)", DateUtil.formatLocalDateTime(LocalDateTime.now()), ip2ConnectFactory.getHostName(), loopTemp, baseValue, ObjectUtils.isEmpty(ip1Value) ? "" : ip1Value));
             });
             /*
             延时等待下一次的写入
