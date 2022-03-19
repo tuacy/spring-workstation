@@ -1,18 +1,15 @@
 package com.tuacy.spring.workstation.sharding.sphere.jdbc.controller;
 
-import cn.hutool.core.date.DateUtil;
-import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.history.HistoryDO;
-import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.stat.StatDO;
-import com.tuacy.spring.workstation.sharding.sphere.jdbc.service.IHistoryService;
-import com.tuacy.spring.workstation.sharding.sphere.jdbc.service.IStatService;
+import com.tuacy.common.entity.web.controller.BaseController;
+import com.tuacy.common.entity.web.response.ResponseResult;
+import com.tuacy.spring.workstation.sharding.sphere.jdbc.entity.model.User;
+import com.tuacy.spring.workstation.sharding.sphere.jdbc.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import javax.annotation.Resource;
 
 /**
  * @version 1.0
@@ -22,49 +19,26 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/mock")
 @Slf4j
-public class MockController {
+public class MockController extends BaseController {
 
-    private IHistoryService historyService;
-    private IStatService statService;
-
-    @Autowired
-    public void setHistoryService(IHistoryService historyService) {
-        this.historyService = historyService;
-    }
-
-    @Autowired
-    public void setStatService(IStatService statService) {
-        this.statService = statService;
-    }
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * 测试函数
      *
      * @return 是否成功
      */
-    @RequestMapping(value = "/historyInsert", method = RequestMethod.POST)
-    public String historyInsert() {
-        HistoryDO item = new HistoryDO();
-        item.setPointPkId(Math.abs((int) UUID.randomUUID().getLeastSignificantBits()));
-        item.setRecTime(DateUtil.formatLocalDateTime(LocalDateTime.now()));
-        item.setValue(10d);
-        historyService.insertHistory(item);
-        return "ok";
-    }
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+    public ResponseResult<Void> addUser() {
+        User user = new User();
+        user.setBirthday("19890818");
+        user.setId(1L);
+        user.setNickname("tuacy");
+        user.setPassword("123456");
+        user.setSex(1);
+        userMapper.insertUser(user);
 
-    /**
-     * 测试函数
-     *
-     * @return 是否成功
-     */
-    @RequestMapping(value = "/statInsert", method = RequestMethod.POST)
-    public String statInsert() {
-        StatDO item = new StatDO();
-        item.setPointPkId(Math.abs((int) UUID.randomUUID().getLeastSignificantBits()));
-        item.setRecTime("2021-05-07 11:50:00");
-        item.setValue(10d);
-        item.setIncrValue(10d);
-        statService.insertStat(item);
-        return "ok";
+        return setResponseResult();
     }
 }

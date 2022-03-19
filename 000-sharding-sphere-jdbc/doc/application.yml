@@ -1,0 +1,71 @@
+# web port
+server:
+  port: 9016
+
+spring:
+  shardingsphere:
+    # 属性配置
+    props:
+      # 展示修改以后的sql语句
+      sql-show: true
+    # 数据源配置
+    datasource:
+      names: history, stat  # 指定数据源名字，多个数据源之间以逗号分隔
+      history:
+        jdbc-url: jdbc:mysql://192.168.101.100:3307/sharding?serverTimezone=Asia/Shanghai&useSSL=false
+        # 数据库驱动类名
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        # 数据库连接池类名称
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+        password: 123456
+      stat:
+        jdbc-url: jdbc:mysql://192.168.101.100:3306/stat?serverTimezone=Asia/Shanghai&useSSL=false
+        # 数据库驱动类名
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        # 数据库连接池类名称
+        type: com.zaxxer.hikari.HikariDataSource
+        username: root
+        password: 123456
+    # 规则配置
+    rules:
+      sharding:
+        key-generators:
+          # 此处必须要配置，否则会导致报错，因为shardingsphere-jdbc-core-spring-boot-starter需要加载此项配置，官网的demo例子有错
+          snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 24 # 雪花算法的workId  机器为标识 0-1024
+        tables:
+          # 逻辑表名称 -- 按年分表 history_acc_2021
+          history_acc:
+            actual-data-nodes: history.history_acc_$->{2020..2031},stat.history_acc_$->{2020..2031}
+            database-strategy:
+              hint:
+                sharding-algorithm-name: database-hin-sharding
+            table-strategy:
+              standard:
+                sharding-column: recTime
+                sharding-algorithm-name: table-year-sharding
+        # 分片算法配置
+        sharding-algorithms:
+          database-hin-sharding:
+            type: DatabaseHardingType
+            props: {}
+          table-year-sharding: # 自定义分片算法的别名 -- 按年分表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 0 # 0对应按年分表 TableTimeShardingEnum
+          table-month-sharding: # 自定义分片算法的别名 -- 按月分表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 1 # 1对应按月分表 TableTimeShardingEnum
+          table-week-sharding: # 自定义分片算法的别名 -- 按周月表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 2 # 2对应按周分表 TableTimeShardingEnum
+          table-day-sharding: # 自定义分片算法的别名 -- 按天周表
+            type: TableShardingTypeTime
+            props:
+              shardingType: 3 # 3对应按年天表 TableTimeShardingEnum
+

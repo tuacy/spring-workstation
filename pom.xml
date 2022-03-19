@@ -11,6 +11,7 @@
         <module>003-easypoi</module>
         <module>common</module>
         <module>004-redis</module>
+        <module>005-redis-shell</module>
     </modules>
 
     <parent>

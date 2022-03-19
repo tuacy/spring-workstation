@@ -15,4 +15,5 @@ starter/starter.iml
 starter/target
 
 004-redis/004-redis.iml
-\
+
+005-redis-shell/005-redis-shell.iml
